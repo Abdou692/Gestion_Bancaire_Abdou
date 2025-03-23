@@ -1,3 +1,5 @@
+<?php include __DIR__ . '/../templates/header.php'; ?>
+
 <div class="form-container">
     <h2>Ajouter un compte</h2>
     <form method="POST" action="index.php?action=ajouter_compte">
@@ -27,3 +29,5 @@
         <button type="submit" name="ajouter">Ajouter</button>
     </form>
 </div>
+
+<?php include __DIR__ . '/../templates/footer.php'; ?>

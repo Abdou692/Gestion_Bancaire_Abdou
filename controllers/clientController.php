@@ -14,38 +14,41 @@ class ClientController {
     }
 
     public function create() {
-        if (isset($_POST['ajouter']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['adresse'])) {
+        if (isset($_POST['ajouter']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['adresse']) && isset($_POST['telephone'])) {
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
             $adresse = $_POST['adresse'];
+            $telephone = $_POST['telephone'];
 
             try {
                 $pdo = getConnexion();
-                $stmt = $pdo->prepare('INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)');
-                $stmt->execute([$nom, $prenom, $adresse]);
+                $stmt = $pdo->prepare('INSERT INTO clients (nom, prenom, adresse, telephone) VALUES (?, ?, ?, ?)');
+                $stmt->execute([$nom, $prenom, $adresse, $telephone]);
 
-                header('Location: index.php?action=listClient');
+                header('Location: index.php?action=listes_clients');
                 exit();
             } catch (PDOException $e) {
                 echo "Erreur de base de données : " . $e->getMessage();
             }
         }
+
         include __DIR__ . '/../views/clients/create.php';
     }
 
     public function edit() {
-        if (isset($_GET['id']) && isset($_POST['modifier']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['adresse'])) {
+        if (isset($_GET['id']) && isset($_POST['modifier']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['adresse']) && isset($_POST['telephone'])) {
             $id = $_GET['id'];
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
             $adresse = $_POST['adresse'];
+            $telephone = $_POST['telephone'];
 
             try {
                 $pdo = getConnexion();
-                $stmt = $pdo->prepare('UPDATE clients SET nom = ?, prenom = ?, adresse = ? WHERE id = ?');
-                $stmt->execute([$nom, $prenom, $adresse, $id]);
+                $stmt = $pdo->prepare('UPDATE clients SET nom = ?, prenom = ?, adresse = ?, telephone = ? WHERE id = ?');
+                $stmt->execute([$nom, $prenom, $adresse, $telephone, $id]);
 
-                header('Location: index.php?action=listClient');
+                header('Location: index.php?action=listes_clients');
                 exit();
             } catch (PDOException $e) {
                 echo "Erreur de base de données : " . $e->getMessage();
@@ -59,6 +62,7 @@ class ClientController {
                 $stmt = $pdo->prepare('SELECT * FROM clients WHERE id = ?');
                 $stmt->execute([$id]);
                 $client = $stmt->fetch(PDO::FETCH_ASSOC);
+
                 include __DIR__ . '/../views/clients/edit.php';
             } catch (PDOException $e) {
                 echo "Erreur de base de données : " . $e->getMessage();
@@ -69,18 +73,12 @@ class ClientController {
     public function delete() {
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-            $pdo = getConnexion();
-
             try {
-                // Supprimer les comptes associés
-                $stmtComptes = $pdo->prepare('DELETE FROM comptes WHERE idClient = ?');
-                $stmtComptes->execute([$id]);
+                $pdo = getConnexion();
+                $stmt = $pdo->prepare('DELETE FROM clients WHERE id = ?');
+                $stmt->execute([$id]);
 
-                // Supprimer le client
-                $stmtClient = $pdo->prepare('DELETE FROM clients WHERE id = ?');
-                $stmtClient->execute([$id]);
-
-                header('Location: index.php?action=listClient');
+                header('Location: index.php?action=listes_clients');
                 exit();
             } catch (PDOException $e) {
                 echo "Erreur de base de données : " . $e->getMessage();
@@ -96,6 +94,7 @@ class ClientController {
                 $stmt = $pdo->prepare('SELECT * FROM clients WHERE id = ?');
                 $stmt->execute([$id]);
                 $client = $stmt->fetch(PDO::FETCH_ASSOC);
+
                 include __DIR__ . '/../views/clients/view.php';
             } catch (PDOException $e) {
                 echo "Erreur de base de données : " . $e->getMessage();

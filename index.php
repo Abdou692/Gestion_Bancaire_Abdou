@@ -1,30 +1,36 @@
 <?php
 session_start();
 
-// Inclure les contrôleurs et la connexion à la base de données
 require_once __DIR__ . '/controllers/clientController.php';
 require_once __DIR__ . '/controllers/compteController.php';
 require_once __DIR__ . '/controllers/adminController.php';
 require_once __DIR__ . '/dao/connexion.php';
 
-// Instancier les contrôleurs
 $clientController = new ClientController();
 $compteController = new CompteController();
 $adminController = new AdminController();
 
-// Gérer les actions
 if (isset($_GET['action'])) {
-    $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING); // Filtrer l'entrée
+    $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
 
     switch ($action) {
         case 'connexion_admin':
             $adminController->connexionAdmin();
+            break;
+        case 'deconnexion':
+            $adminController->deconnexionAdmin();
             break;
         case 'ajouter_admin':
             $adminController->createAdmin();
             break;
         case 'liste_admin':
             $adminController->index();
+            break;
+        case 'modifier_admin':
+            $adminController->editAdmin();
+            break;
+        case 'supprimer_admin':
+            $adminController->deleteAdmin();
             break;
         case 'listClient':
             $clientController->index();
@@ -60,12 +66,10 @@ if (isset($_GET['action'])) {
             $compteController->create();
             break;
         default:
-            // Action non reconnue, afficher une erreur ou une page par défaut
-            echo "Action non reconnue.";
-            $clientController->index(); // Ou une autre action par défaut
+            $adminController->connexionAdmin();
             break;
     }
 } else {
-    $clientController->index(); // Action par défaut si aucune action n'est spécifiée
+    $adminController->connexionAdmin();
 }
 ?>

@@ -1,26 +1,33 @@
-<?php include __DIR__ . '/../templates/header.php'; ?>
 
-<h1>Liste des Administrateurs</h1>
 
+<h2>Liste des Administrateurs</h2>
 <table>
     <thead>
         <tr>
+            <th>Nom d'utilisateur</th>
             <th>Email</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($admins as $admin): ?>
+        <?php if (isset($admins) && is_array($admins) && !empty($admins)): ?>
+            <?php foreach ($admins as $admin): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($admin->getUsername()); ?></td>
+                    <td><?php echo htmlspecialchars($admin->getEmail()); ?></td>
+                    <td>
+                        <a href="index.php?action=modifier_admin&id=<?php echo $admin->getId(); ?>">Modifier</a>
+                        <a href="index.php?action=supprimer_admin&id=<?php echo $admin->getId(); ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet administrateur ?');">Supprimer</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php else: ?>
             <tr>
-                <td><?php echo htmlspecialchars($admin['email']); ?></td>
-                <td>
-                    <a href="?action=supprimer_admin&id=<?php echo $admin['idAdmin']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet administrateur ?')">Supprimer</a>
-                </td>
+                <td colspan="3">Aucun administrateur trouvé.</td>
             </tr>
-        <?php endforeach; ?>
+        <?php endif; ?>
     </tbody>
 </table>
 
-<a href="?action=ajouter_admin">Ajouter un administrateur</a>
+<a href="index.php?action=ajouter_admin">Ajouter un administrateur</a>
 
-<?php include __DIR__ . '/../templates/footer.php'; ?>

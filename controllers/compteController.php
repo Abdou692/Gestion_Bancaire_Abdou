@@ -5,8 +5,22 @@ class CompteController {
     public function index() {
         try {
             $pdo = getConnexion();
-            $stmt = $pdo->query('SELECT comptes.*, clients.nom, clients.prenom FROM comptes INNER JOIN clients ON comptes.idClient = clients.id');
+            $stmt = $pdo->query('SELECT comptes.*, clients.nom, clients.prenom FROM comptes INNER JOIN clients ON comptes.idClient = clients.id ORDER BY clients.id');
             $comptes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Regrouper les comptes par client
+            $comptesParClient = [];
+            foreach ($comptes as $compte) {
+                $clientId = $compte['idClient'];
+                if (!isset($comptesParClient[$clientId])) {
+                    $comptesParClient[$clientId] = [
+                        'nomClient' => $compte['nom'] . ' ' . $compte['prenom'],
+                        'comptes' => []
+                    ];
+                }
+                $comptesParClient[$clientId]['comptes'][] = $compte;
+            }
+
             include __DIR__ . '/../views/comptes/index.php';
         } catch (PDOException $e) {
             echo "Erreur de base de données : " . $e->getMessage();
@@ -69,6 +83,11 @@ class CompteController {
                 $stmt = $pdo->prepare('SELECT * FROM comptes WHERE id = ?');
                 $stmt->execute([$id]);
                 $compte = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                // Récupérer la liste des clients
+                $stmtClients = $pdo->query('SELECT id, nom, prenom FROM clients');
+                $clients = $stmtClients->fetchAll(PDO::FETCH_ASSOC);
+
                 include __DIR__ . '/../views/comptes/edit.php';
             } catch (PDOException $e) {
                 echo "Erreur de base de données : " . $e->getMessage();
@@ -100,6 +119,12 @@ class CompteController {
                 $stmt = $pdo->prepare('SELECT * FROM comptes WHERE id = ?');
                 $stmt->execute([$id]);
                 $compte = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                // Récupérer le nom et prénom du client
+                $stmtClient = $pdo->prepare('SELECT nom, prenom FROM clients WHERE id = ?');
+                $stmtClient->execute([$compte['idClient']]);
+                $nomClient = $stmtClient->fetch(PDO::FETCH_ASSOC);
+
                 include __DIR__ . '/../views/comptes/view.php';
             } catch (PDOException $e) {
                 echo "Erreur de base de données : " . $e->getMessage();
@@ -107,3 +132,4 @@ class CompteController {
         }
     }
 }
+?>
