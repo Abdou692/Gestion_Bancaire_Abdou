@@ -131,5 +131,23 @@ class CompteController {
             }
         }
     }
+
+    public function dashboard() {
+        try {
+            $pdo = getConnexion();
+
+            // Nombre total de clients
+            $stmtClients = $pdo->query('SELECT COUNT(*) FROM clients');
+            $nombreClients = $stmtClients->fetchColumn();
+
+            // Nombre total de comptes
+            $stmtComptes = $pdo->query('SELECT COUNT(*) FROM comptes');
+            $nombreComptes = $stmtComptes->fetchColumn();
+
+            include __DIR__ . '/../views/dashboard.php';
+        } catch (PDOException $e) {
+            echo "Erreur de base de données : " . $e->getMessage();
+        }
+    }
 }
 ?>

@@ -50,6 +50,9 @@ if (isset($_GET['action'])) {
         case 'listes_comptes':
             $compteController->index();
             break;
+        case 'listes_clients':
+            $clientController->index();
+            break;
         case 'ajouter_compte':
             $compteController->create();
             break;
@@ -65,6 +68,10 @@ if (isset($_GET['action'])) {
         case 'creer_compte':
             $compteController->create();
             break;
+        case 'tableau_de_bord':
+            $compteController->dashboard();
+            break;
+        
         default:
             $adminController->connexionAdmin();
             break;

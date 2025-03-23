@@ -38,7 +38,7 @@ class AdminController {
                     if ($adminData && password_verify($password, $adminData['password'])) {
                         $_SESSION['id'] = $adminData['id'];
                         $_SESSION['email'] = $adminData['email'];
-                        header('Location: index.php?action=listClient');
+                        header('Location: index.php?action=tableau_de_bord'); // Redirection vers le tableau de bord
                         exit();
                     } else {
                         $errorMessage = 'Email ou mot de passe incorrect.';
@@ -190,3 +190,4 @@ class AdminController {
         exit();
     }
 }
+?>
