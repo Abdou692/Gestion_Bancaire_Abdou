@@ -2,6 +2,13 @@
 
 <div class="form-container">
     <h2>Ajouter un compte</h2>
+
+    <?php if (isset($error_message)): ?>
+        <div style="color: red; margin-bottom: 10px;">
+            <?php echo $error_message; ?>
+        </div>
+    <?php endif; ?>
+
     <form method="POST" action="index.php?action=ajouter_compte">
         <div class="form-group">
             <label for="rib">RIB :</label>
@@ -11,7 +18,7 @@
             <label for="typeCompte">Type de compte :</label>
             <select name="typeCompte" id="typeCompte">
                 <option value="Compte courant">Compte courant</option>
-                <option value="Compte épargne">Compte épargne</option>
+                <option value="Compte epargne">Compte epargne</option>
             </select>
         </div>
         <div class="form-group">

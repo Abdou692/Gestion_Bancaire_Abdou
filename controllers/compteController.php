@@ -27,12 +27,39 @@ class CompteController {
         }
     }
 
+    private function compteExiste($idClient, $typeCompte) {
+        try {
+            $pdo = getConnexion();
+            $stmt = $pdo->prepare('SELECT COUNT(*) FROM comptes WHERE idClient = ? AND typeCompte = ?');
+            $stmt->execute([$idClient, $typeCompte]);
+            $count = $stmt->fetchColumn();
+            return $count > 0;
+        } catch (PDOException $e) {
+            echo "Erreur de base de données : " . $e->getMessage();
+            return true; // Considérer qu'un compte existe pour éviter les doublons en cas d'erreur
+        }
+    }
+
     public function create() {
         if (isset($_POST['ajouter']) && isset($_POST['rib']) && isset($_POST['typeCompte']) && isset($_POST['solde']) && isset($_POST['idClient'])) {
             $rib = $_POST['rib'];
             $typeCompte = $_POST['typeCompte'];
             $solde = $_POST['solde'];
             $idClient = $_POST['idClient'];
+
+            // Vérifier si le client a déjà un compte du même type
+            if ($this->compteExiste($idClient, $typeCompte)) {
+                $error_message = "Erreur : Ce client a déjà un compte " . $typeCompte . "."; // Définir le message d'erreur
+                try {
+                    $pdo = getConnexion();
+                    $stmt = $pdo->query('SELECT id, nom, prenom FROM clients');
+                    $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    include __DIR__ . '/../views/comptes/create.php';
+                } catch (PDOException $e) {
+                    echo "Erreur de base de données : " . $e->getMessage();
+                }
+                return;
+            }
 
             try {
                 $pdo = getConnexion();

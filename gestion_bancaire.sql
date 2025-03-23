@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 23 mars 2025 à 20:55
+-- Généré le : dim. 23 mars 2025 à 23:50
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.1.25
 
@@ -43,7 +43,8 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `username`, `email`, `password`, `created_at`, `updated_at`) VALUES
-(4, 'admin1', 'admin@banque.com', '$2y$10$8mQ7M8Wj6Xw44J4lFwpjpe9aRfh6Pc3joOhwK2P/1G.TLsDI7WEse', '2025-03-23 15:09:13', '2025-03-23 18:46:45');
+(4, 'admin1', 'admin@banque.com', '$2y$10$8mQ7M8Wj6Xw44J4lFwpjpe9aRfh6Pc3joOhwK2P/1G.TLsDI7WEse', '2025-03-23 15:09:13', '2025-03-23 18:46:45'),
+(5, 'admin2', 'add@gmail.com', '$2y$10$P5AOuv1dApTildac69mUzOrtBNWL.GFqWLDh50Y.3a5wsuq7neANi', '2025-03-23 21:34:36', '2025-03-23 21:34:36');
 
 -- --------------------------------------------------------
 
@@ -69,19 +70,13 @@ INSERT INTO `clients` (`id`, `nom`, `prenom`, `email`, `telephone`, `adresse`) V
 (2, 'Martin', 'Sophie', 'sophie.martin@example.com', '0698765432', '20 avenue des Fleurs, Lyon'),
 (3, 'Lefevre', 'Pierree', 'pierre.lefevre@example.com', '0712345678', '30 boulevard de la Mer, Marseille'),
 (4, 'Garcia', 'Marie', 'marie.garcia@example.com', '0498765432', '40 rue du Port, Nice'),
-(5, 'Dubois', 'Michel', 'michel.dubois@example.com', '0512345678', '50 avenue de la Gare, Toulouse'),
-(6, 'Robert', 'Nathalie', 'nathalie.robert@example.com', '0398765432', '60 rue de la Republique, Lille'),
-(8, 'Petit', 'Isabelle', 'isabelle.petit@example.com', '0987654321', '80 rue de la Liberte, Strasbourg'),
 (9, 'Durand', 'Laurent', 'laurent.durand@example.com', '0812345678', '90 avenue de la Victoire, Nantes'),
-(10, 'Moreau', 'Sandrine', 'sandrine.moreau@example.com', '0798765432', '100 rue du Commerce, Rennes'),
-(11, 'Simon', 'Philippe', 'philippe.simon@example.com', '0612345678', '110 avenue de la Paix, Montpellier'),
-(15, 'Blanc', 'Patrick', 'patrick.blanc@example.com', '0212345678', '150 avenue des Champs, Reims'),
+(10, 'Assia', 'Yasmine', 'sandrine.moreau@example.com', '0798765432', '100 rue du Commerce, Rennes'),
 (16, 'Lambert', 'Martine', 'martine.lambert@example.com', '0987654321', '160 rue de la Republique, Toulon'),
-(17, 'Bertrand', 'Alain', 'alain.bertrand@example.com', '0812345678', '170 avenue de la Liberte, Angers'),
 (18, 'Thomas', 'Catherine', 'catherine.thomas@example.com', '0798765432', '180 rue du Commerce, Clermont-Ferrand'),
 (19, 'Vincent', 'Nicolas', 'nicolas.vincent@example.com', '0612345678', '190 avenue de la Victoire, Limoges'),
 (20, 'Clement', 'Valerie', 'valerie.clement@example.com', '0598765432', '200 rue de la Paix, Tours'),
-(68, 'ka', 'samba', 'add@gmail.com', '0668997544', '1 Rue Danielle Casanova 78990 TRAPPES');
+(68, 'Sow', 'samba', 'add@gmail.com', '0668998044', '1 Rue Danielle Casanova 78990 Dreux');
 
 -- --------------------------------------------------------
 
@@ -102,24 +97,17 @@ CREATE TABLE `comptes` (
 --
 
 INSERT INTO `comptes` (`id`, `rib`, `typeCompte`, `solde`, `idClient`) VALUES
-(1, 'FR7699001122334455667788990011', 'Compte courant', 1904.00, 68),
 (2, 'FR7655667788990011223344556671', 'Compte epargne', 8500.00, 19),
 (3, 'FR7611223344556677889900112231', 'Compte courant', 2600.00, 20),
 (4, 'FR7666778899001122334455667781', 'Compte courant', 1300.00, 1),
-(5, 'FR7622334455667788990011223341', 'Compte epargne', 7200.00, 2),
-(6, 'FR7677889900112233445566778891', 'Compte courant', 3300.00, 3),
 (7, 'FR7633445566778899001122334451', 'Compte courant', 2100.00, 4),
-(8, 'FR7688990011223344556677889901', 'Compte epargne', 6600.00, 5),
-(9, 'FR7644556677889900112233445561', 'Compte courant', 1850.00, 6),
-(11, 'FR7655667788990011223344556672', 'Compte epargne', 8200.00, 8),
 (12, 'FR7611223344556677889900112232', 'Compte courant', 2700.00, 9),
-(13, 'FR7666778899001122334455667782', 'Compte courant', 1400.00, 10),
-(14, 'FR7622334455667788990011223342', 'Compte epargne', 7400.00, 11),
-(18, 'FR7644556677889900112233445562', 'Compte courant', 1950.00, 15),
+(13, 'FR7666778899001122334455667782', 'Compte courant', 10000.00, 10),
 (19, 'FR7600112233445566778899001122', 'Compte courant', 2400.00, 16),
-(20, 'FR7655667788990011223344556673', 'Compte epargne', 8400.00, 17),
 (29, 'FR7645667788990011223344556601', 'Compte courant', 8.00, 68),
-(30, 'FR7645667788990011223344556602', 'Compte épargne', 7.00, 1);
+(34, 'FR7645667788990011223344556405', 'Compte epargne', 2000.00, 1),
+(35, 'FR7645667788990011223344556345', 'Compte epargne', 5000.00, 10),
+(36, 'FR7645667788990011223344559567', 'Compte epargne', 2500.00, 68);
 
 --
 -- Index pour les tables déchargées
@@ -156,19 +144,19 @@ ALTER TABLE `comptes`
 -- AUTO_INCREMENT pour la table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT pour la table `comptes`
 --
 ALTER TABLE `comptes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- Contraintes pour les tables déchargées

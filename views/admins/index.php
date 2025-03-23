@@ -1,5 +1,4 @@
 
-
 <h2>Liste des Administrateurs</h2>
 <table>
     <thead>
@@ -30,4 +29,3 @@
 </table>
 
 <a href="index.php?action=ajouter_admin">Ajouter un administrateur</a>
-

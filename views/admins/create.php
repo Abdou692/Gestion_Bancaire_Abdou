@@ -1,5 +1,4 @@
 
-
 <div class="form-container">
     <h2>Ajouter un administrateur</h2>
     <form method="POST" action="index.php?action=ajouter_admin">
@@ -18,4 +17,3 @@
         <button type="submit" name="add">Ajouter</button>
     </form>
 </div>
-

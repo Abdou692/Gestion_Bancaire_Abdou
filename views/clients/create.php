@@ -2,6 +2,13 @@
 
 <div class="form-container">
     <h2>Ajouter un client</h2>
+
+    <?php if (isset($error_message)): ?>
+        <div style="color: red; margin-bottom: 10px;">
+            <?php echo $error_message; ?>
+        </div>
+    <?php endif; ?>
+
     <form method="POST" action="index.php?action=ajouter_client">
         <div class="form-group">
             <label for="nom">Nom :</label>

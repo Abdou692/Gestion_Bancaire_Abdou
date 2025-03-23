@@ -1,5 +1,4 @@
 
-
 <h2>Modifier l'administrateur</h2>
 <form method="POST" action="index.php?action=modifier_admin&id=<?php echo $admin->getId(); ?>">
     <div class="form-group">
@@ -16,4 +15,3 @@
     </div>
     <button type="submit" name="update">Mettre à jour</button>
 </form>
-

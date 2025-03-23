@@ -6,7 +6,7 @@ body {
 }
 
 .header {
-    background-color: #333;
+    background-color: #454b4a;
     color: white;
     padding: 10px;
     display: flex;
@@ -48,6 +48,7 @@ body {
 
 .container {
     padding: 20px;
+    padding-bottom: 60px; /* Ajout de padding en bas pour éviter le chevauchement avec le footer */
 }
 
 h1 {
@@ -75,15 +76,6 @@ tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-.footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
 
 .form-container {
     background-color: white;
