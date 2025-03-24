@@ -35,8 +35,7 @@ function getConnexion() {
 
         return $pdo; // Retourner l'objet PDO si la connexion réussit
     } catch (PDOException $e) {
-        // En cas d'erreur de connexion, on affiche un message et on arrête le script
-        die("Erreur de connexion à la base de données : " . $e->getMessage());
+        // En cas d'erreur de connexion, on retourne null
+        return null;
     }
 }
-?>

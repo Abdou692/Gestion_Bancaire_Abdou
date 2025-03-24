@@ -59,21 +59,6 @@ Le projet est organisé de la manière suivante :
 5.  Les modèles interagissent avec la base de données via `dao/connexion.php`.
 6.  Les vues affichent les données à l'utilisateur.
 
-## Améliorations Possibles
-
-* Implémenter des contrôleurs explicites pour chaque entité.
-* Ajouter une gestion des erreurs robuste.
-* Améliorer la sécurité (hachage des mots de passe, requêtes préparées, etc.).
-* Ajouter une validation des données côté serveur.
-* Envisager l'utilisation d'un framework PHP pour une meilleure structure et sécurité.
-
-## Installation et Utilisation
-
-1.  Clonez le dépôt Git.
-2.  Importez `gestion\_bancaire.sql` dans votre base de données MySQL.
-3.  Configurez la connexion à la base de données dans `dao/connexion.php`.
-4.  Créez `admin\_credentials.txt` avec les informations d'identification de l'administrateur.
-5.  Accédez à l'application via votre navigateur.
 
 ## Contributeur
 

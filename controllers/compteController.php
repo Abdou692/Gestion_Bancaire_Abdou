@@ -171,6 +171,10 @@ class CompteController {
             $stmtComptes = $pdo->query('SELECT COUNT(*) FROM comptes');
             $nombreComptes = $stmtComptes->fetchColumn();
 
+            // Nombre total de contrats
+            $stmtContrats = $pdo->query('SELECT COUNT(*) FROM contrats');
+            $nombreContrats = $stmtContrats->fetchColumn();
+
             include __DIR__ . '/../views/dashboard.php';
         } catch (PDOException $e) {
             echo "Erreur de base de données : " . $e->getMessage();

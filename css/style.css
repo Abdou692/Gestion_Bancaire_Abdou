@@ -8,19 +8,27 @@ body {
 .header {
     background-color: #454b4a;
     color: white;
-    padding: 10px;
+    padding: 5px; 
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .header-left a {
     color: white;
     text-decoration: none;
-    margin: 0 10px;
-    padding: 5px 10px;
+    margin: 2px; 
+    padding: 3px 6px; 
     border: 1px solid white;
-    border-radius: 5px;
+    border-radius: 3px; 
+    font-size: 8px; 
 }
 
 .header-left a:hover {
@@ -30,15 +38,20 @@ body {
 .header-right {
     display: flex;
     align-items: center;
+    margin-top: 2px; 
 }
 
 .welcome {
-    margin-right: 10px;
+    margin-right: 5px; 
+    font-size: 10px; 
 }
 
 .logout {
     background-color: #d9534f;
     border-color: #d43f3a;
+    font-size: 12px; 
+    padding: 3px 6px; 
+    border-radius: 3px; 
 }
 
 .logout:hover {
@@ -48,7 +61,7 @@ body {
 
 .container {
     padding: 20px;
-    padding-bottom: 60px; /* Ajout de padding en bas pour éviter le chevauchement avec le footer */
+    padding-bottom: 60px;
 }
 
 h1 {
@@ -75,7 +88,6 @@ th {
 tr:nth-child(even) {
     background-color: #f9f9f9;
 }
-
 
 .form-container {
     background-color: white;
@@ -116,4 +128,56 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 20px; 
+    height: 2px; 
+    background-color: white;
+    margin: 2px 0; 
+}
+
+.menu {
+    display: flex;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    margin: 2px; 
+    padding: 3px 6px; 
+    border: 1px solid white;
+    border-radius: 3px;
+    font-size: 12px; 
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    .menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #454b4a;
+        position: absolute;
+        top: 40px; 
+        left: 0;
+    }
+
+    .menu a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .menu.show {
+        display: flex;
+    }
 }

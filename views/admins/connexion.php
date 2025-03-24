@@ -1,7 +1,10 @@
 <?php
 require_once __DIR__ . '/../../dao/connexion.php';
 
-// session_start(); // Supprimez cette ligne
+// Vérifier si une session est déjà active avant de démarrer une nouvelle
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Traitement de la connexion
 if (isset($_POST['connect'])) {
@@ -24,7 +27,7 @@ if (isset($_POST['connect'])) {
             if ($adminData && password_verify($password, $adminData['password'])) {
                 $_SESSION['id'] = $adminData['id'];
                 $_SESSION['email'] = $adminData['email'];
-                header('Location: ../../index.php?action=liste_admin'); // Rediriger vers la liste des administrateurs
+                header('Location: ../../index.php?action=liste_admins');
                 exit();
             } else {
                 echo "<p style='color:red;'>Email ou mot de passe incorrect.</p>";

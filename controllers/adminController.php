@@ -6,39 +6,27 @@ class AdminController {
     public function connexionAdmin() {
         $errorMessage = '';
 
-        // Débogage : afficher les données POST reçues
-        echo "<pre>";
-        print_r($_POST);
-        echo "</pre>";
-
         if (isset($_POST['connect']) && !empty($_POST['email']) && !empty($_POST['password'])) {
-            $emailOrUsername = $_POST['email']; // Ne pas appliquer trim() ici
+            $emailOrUsername = $_POST['email'];
             $password = trim($_POST['password']);
 
             try {
                 $pdo = getConnexion();
                 if ($pdo) {
-                    // Tentative 1 : recherche par email
                     $stmt = $pdo->prepare('SELECT * FROM admins WHERE email = ?');
                     $stmt->execute([$emailOrUsername]);
                     $adminData = $stmt->fetch();
 
-                    // Tentative 2 : recherche par nom d'utilisateur si l'email n'a pas été trouvé
                     if (!$adminData) {
                         $stmt = $pdo->prepare('SELECT * FROM admins WHERE username = ?');
                         $stmt->execute([$emailOrUsername]);
                         $adminData = $stmt->fetch();
                     }
 
-                    echo "<pre>";
-                    var_dump($password);
-                    var_dump($adminData);
-                    echo "</pre>";
-
                     if ($adminData && password_verify($password, $adminData['password'])) {
                         $_SESSION['id'] = $adminData['id'];
                         $_SESSION['email'] = $adminData['email'];
-                        header('Location: index.php?action=tableau_de_bord'); // Redirection vers le tableau de bord
+                        header('Location: index.php?action=tableau_de_bord');
                         exit();
                     } else {
                         $errorMessage = 'Email ou mot de passe incorrect.';
