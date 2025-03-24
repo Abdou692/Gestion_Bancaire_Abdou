@@ -1,5 +1,6 @@
 
 <?php include __DIR__ . '/../templates/header.php'; ?>
+
 <h2>Liste des Contrats</h2>
 <a href="index.php?action=ajouter_contrat">Ajouter un contrat</a>
 <table border="1">

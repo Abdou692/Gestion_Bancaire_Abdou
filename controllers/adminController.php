@@ -6,27 +6,31 @@ class AdminController {
     public function connexionAdmin() {
         $errorMessage = '';
 
+        
         if (isset($_POST['connect']) && !empty($_POST['email']) && !empty($_POST['password'])) {
-            $emailOrUsername = $_POST['email'];
+            $emailOrUsername = $_POST['email']; // Ne pas appliquer trim() ici
             $password = trim($_POST['password']);
 
             try {
                 $pdo = getConnexion();
                 if ($pdo) {
+                    // Tentative 1 : recherche par email
                     $stmt = $pdo->prepare('SELECT * FROM admins WHERE email = ?');
                     $stmt->execute([$emailOrUsername]);
                     $adminData = $stmt->fetch();
 
+                    // Tentative 2 : recherche par nom d'utilisateur si l'email n'a pas été trouvé
                     if (!$adminData) {
                         $stmt = $pdo->prepare('SELECT * FROM admins WHERE username = ?');
                         $stmt->execute([$emailOrUsername]);
                         $adminData = $stmt->fetch();
                     }
 
+
                     if ($adminData && password_verify($password, $adminData['password'])) {
                         $_SESSION['id'] = $adminData['id'];
                         $_SESSION['email'] = $adminData['email'];
-                        header('Location: index.php?action=tableau_de_bord');
+                        header('Location: index.php?action=listClient');
                         exit();
                     } else {
                         $errorMessage = 'Email ou mot de passe incorrect.';
@@ -178,4 +182,3 @@ class AdminController {
         exit();
     }
 }
-?>

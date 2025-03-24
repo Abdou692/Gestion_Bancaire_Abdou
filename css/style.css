@@ -24,11 +24,11 @@ body {
 .header-left a {
     color: white;
     text-decoration: none;
-    margin: 2px; 
+    margin: 5px; 
     padding: 3px 6px; 
     border: 1px solid white;
     border-radius: 3px; 
-    font-size: 8px; 
+    font-size: 14px; 
 }
 
 .header-left a:hover {
@@ -43,7 +43,7 @@ body {
 
 .welcome {
     margin-right: 5px; 
-    font-size: 10px; 
+    font-size: 12px; 
 }
 
 .logout {

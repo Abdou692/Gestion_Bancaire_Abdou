@@ -16,10 +16,10 @@
             <div class="menu">
                 <a href="index.php?action=listClient">Liste des clients</a>
                 <a href="index.php?action=ajouter_client">Ajouter un client</a>
-                <a href="index.php?action=liste_admins">Liste des Admins</a>
                 <a href="index.php?action=listes_comptes">Listes des comptes</a>
                 <a href="index.php?action=ajouter_compte">Ajouter un compte</a>
                 <a href="index.php?action=liste_contrats">Liste des contrats</a>
+                <a href="index.php?action=liste_admins">Liste des Admins</a>
             </div>
         </div>
         <div class="header-right">

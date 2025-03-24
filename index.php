@@ -37,9 +37,8 @@ if (isset($_GET['action'])) {
             break;
 
         // Actions pour les clients
-        case 'listClient':
+        case 'listes_clients':
             $clientController->index();
-            break;
         case 'ajouter_client':
             $clientController->create();
             break;
@@ -49,6 +48,8 @@ if (isset($_GET['action'])) {
         case 'supprimer_client':
             $clientController->delete();
             break;
+        case 'listClient':
+            $clientController->index();
         case 'voir_client':
             $clientController->view();
             break;
