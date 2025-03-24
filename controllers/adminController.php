@@ -6,31 +6,27 @@ class AdminController {
     public function connexionAdmin() {
         $errorMessage = '';
 
-        
         if (isset($_POST['connect']) && !empty($_POST['email']) && !empty($_POST['password'])) {
-            $emailOrUsername = $_POST['email']; // Ne pas appliquer trim() ici
+            $emailOrUsername = $_POST['email'];
             $password = trim($_POST['password']);
 
             try {
                 $pdo = getConnexion();
                 if ($pdo) {
-                    // Tentative 1 : recherche par email
                     $stmt = $pdo->prepare('SELECT * FROM admins WHERE email = ?');
                     $stmt->execute([$emailOrUsername]);
                     $adminData = $stmt->fetch();
 
-                    // Tentative 2 : recherche par nom d'utilisateur si l'email n'a pas été trouvé
                     if (!$adminData) {
                         $stmt = $pdo->prepare('SELECT * FROM admins WHERE username = ?');
                         $stmt->execute([$emailOrUsername]);
                         $adminData = $stmt->fetch();
                     }
 
-
                     if ($adminData && password_verify($password, $adminData['password'])) {
                         $_SESSION['id'] = $adminData['id'];
                         $_SESSION['email'] = $adminData['email'];
-                        header('Location: index.php?action=listClient');
+                        header('Location: index.php?action=tableau_de_bord'); // Redirige vers le tableau de bord
                         exit();
                     } else {
                         $errorMessage = 'Email ou mot de passe incorrect.';
@@ -65,7 +61,7 @@ class AdminController {
                     $stmt = $pdo->prepare('INSERT INTO admins (username, email, password) VALUES (?, ?, ?)');
                     $stmt->execute([$username, $email, $password]);
 
-                    header('Location: index.php?action=liste_admin');
+                    header('Location: index.php?action=liste_admins');
                     exit();
                 } else {
                     echo "Erreur de connexion à la base de données.";
@@ -132,7 +128,7 @@ class AdminController {
                                 $stmt->execute([$username, $email, $id]);
                             }
 
-                            header('Location: index.php?action=liste_admin');
+                            header('Location: index.php?action=liste_admins');
                             exit();
                         }
 
@@ -162,7 +158,7 @@ class AdminController {
                     $stmt = $pdo->prepare('DELETE FROM admins WHERE id = ?');
                     $stmt->execute([$id]);
 
-                    header('Location: index.php?action=liste_admin');
+                    header('Location: index.php?action=liste_admins');
                     exit();
                 } else {
                     echo "Erreur de connexion à la base de données.";
@@ -182,3 +178,4 @@ class AdminController {
         exit();
     }
 }
+?>

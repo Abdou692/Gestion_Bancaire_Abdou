@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../dao/connexion.php';
+require_once __DIR__ . '/../models/client.php';
 
 class ClientController {
     public function index() {

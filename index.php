@@ -16,6 +16,7 @@ if (isset($_GET['action'])) {
     $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
 
     switch ($action) {
+        
         // Actions pour les administrateurs
         case 'connexion_admin':
             $adminController->connexionAdmin();
